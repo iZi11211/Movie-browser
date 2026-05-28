@@ -31,7 +31,7 @@ export function InfiniteMovieList({
     const movies =
       data?.pages?.flatMap((p) => p.results) ?? [];
 
-    if (movies.length > 0 && orderedMovies.length === 0) {
+    if (movies.length > 0) {
       setOrderedMovies(movies);
     }
   }, [data]);

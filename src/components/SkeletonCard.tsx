@@ -1,18 +1,35 @@
-// src/components/SkeletonCard.tsx
-
-
-
 export function SkeletonCard() {
   return (
-    <div
-      className="skeleton-card"
-      aria-hidden="true"
-    >
-      <div className="skeleton-img shimmer" />
+    <div className="movie-card">
+      {/* poster */}
+      <div
+        className="skeleton"
+        style={{
+          width: '100%',
+          height: 330,
+          borderRadius: 18,
+        }}
+      />
 
-      <div className="skeleton-title shimmer" />
+      {/* content */}
+      <div className="movie-content">
+        <div
+          className="skeleton"
+          style={{
+            height: 18,
+            width: '70%',
+            marginBottom: 10,
+          }}
+        />
 
-      <div className="skeleton-meta shimmer" />
+        <div
+          className="skeleton"
+          style={{
+            height: 14,
+            width: '50%',
+          }}
+        />
+      </div>
     </div>
   );
 }
