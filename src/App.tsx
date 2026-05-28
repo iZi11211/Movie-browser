@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { InfiniteMovieList } from './components/InfiniteMovieList';
 import { MovieModal } from './components/MovieModal';
+import { AnimatePresence } from 'framer-motion';
 import './styles/global.css';
 
 function App() {
   const [query, setQuery] = useState('');
-
-  // 🔥 NOWE: stan modala
   const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
 
   return (
@@ -26,13 +25,16 @@ function App() {
         onSelectMovie={setSelectedMovieId}
       />
 
-      {/* 🔥 MODAL */}
-      {selectedMovieId && (
-        <MovieModal
-          movieId={selectedMovieId}
-          onClose={() => setSelectedMovieId(null)}
-        />
-      )}
+      {/* AnimatePresence WRAP dla modala */}
+      <AnimatePresence mode="wait">
+        {selectedMovieId && (
+          <MovieModal
+            key="movie-modal"
+            movieId={selectedMovieId}
+            onClose={() => setSelectedMovieId(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
