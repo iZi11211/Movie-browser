@@ -1,0 +1,540 @@
+/* src/styles/global.css */
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #111827;
+  color: white;
+  min-height: 100vh;
+}
+
+/* =========================
+   APP LAYOUT
+========================= */
+
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+
+/* =========================
+   MOVIES GRID
+========================= */
+
+.movies-grid {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(220px, 1fr)
+  );
+
+  gap: 24px;
+}
+
+/* =========================
+   MOVIE CARD
+========================= */
+
+.movie-card {
+  position: relative;
+
+  background: #1f2937;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-content {
+  padding: 16px;
+}
+
+.movie-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.movie-meta {
+  color: #d1d5db;
+  font-size: 14px;
+}
+
+/* =========================
+   FAVORITE BUTTON
+========================= */
+
+.fav-btn {
+  margin-top: 16px;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-size: 26px;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.fav-btn:hover {
+  transform: scale(1.15);
+}
+
+.fav-btn.active {
+  transform: scale(1.1);
+}
+
+/* =========================
+   SKELETON LOADING
+========================= */
+
+.skeleton-card {
+  width: 100%;
+}
+
+.skeleton-img {
+  width: 100%;
+  height: 330px;
+  border-radius: 18px;
+}
+
+.skeleton-title {
+  width: 80%;
+  height: 24px;
+  margin-top: 16px;
+  border-radius: 8px;
+}
+
+.skeleton-meta {
+  width: 60%;
+  height: 18px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* =========================
+   SHIMMER EFFECT
+========================= */
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #374151 25%,
+    #4b5563 50%,
+    #374151 75%
+  );
+
+  background-size: 200% 100%;
+
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* =========================
+   ERROR / EMPTY STATES
+========================= */
+
+.error-banner,
+.empty-state {
+  margin-top: 80px;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  background: #1f2937;
+}
+
+.error-banner h2,
+.empty-state h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.error-banner p,
+.empty-state p {
+  color: #d1d5db;
+  font-size: 18px;
+}
+
+.error-banner button {
+  margin-top: 24px;
+
+  padding: 12px 20px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  background: #ef4444;
+
+  color: white;
+
+  font-size: 16px;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination {
+  margin-top: 40px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+.pagination button {
+  padding: 12px 18px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 15px;
+
+  transition: background 0.2s ease;
+}
+
+.pagination button:hover {
+  background: #1d4ed8;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+}
+
+/* =========================
+   PLACEHOLDER DATA STATE
+========================= */
+
+.placeholder {
+  opacity: 0.5;
+
+  transition: opacity 0.2s ease;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 32px;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(160px, 1fr)
+    );
+  }
+
+  .movie-poster {
+    height: 250px;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  color: white;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* =========================
+   MOVIE CARD ANIMATIONS
+========================= */
+
+.movie-card {
+  position: relative;
+
+  background: #1f2937;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+
+  will-change: transform;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* HOVER */
+
+.movie-card:hover {
+  transform:
+    scale(1.03)
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 24px
+    rgba(0, 67, 255, 0.15);
+}
+
+/* ACTIVE CLICK */
+
+.movie-card:active {
+  transform:
+    scale(0.99);
+}
+
+/* ACCESSIBILITY */
+
+.movie-card:focus-visible {
+  outline: 2px solid #0043ff;
+
+  outline-offset: 3px;
+}
+
+/* =========================
+   IMAGE EFFECTS
+========================= */
+
+.movie-poster {
+  width: 100%;
+
+  height: 330px;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.movie-card:hover .movie-poster {
+  transform: scale(1.04);
+
+  opacity: 0.95;
+}
+
+/* =========================
+   CONTENT TRANSITIONS
+========================= */
+
+.movie-content {
+  padding: 16px;
+
+  transition:
+    background 0.2s ease;
+}
+
+.movie-card:hover .movie-content {
+  background:
+    rgba(255, 255, 255, 0.02);
+}
+
+/* =========================
+   FAVORITE BUTTON
+========================= */
+
+.fav-btn {
+  margin-top: 12px;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-size: 26px;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.fav-btn:hover {
+  transform: scale(1.15);
+}
+
+.fav-btn:active {
+  transform: scale(0.92);
+}
+
+.fav-btn:focus-visible {
+  outline: 2px solid #0043ff;
+
+  border-radius: 8px;
+}
+
+/* =========================
+   SEARCH INPUT
+========================= */
+
+.search-input {
+  width: 100%;
+
+  padding: 14px 18px;
+
+  border-radius: 12px;
+
+  border: 2px solid transparent;
+
+  outline: none;
+
+  font-size: 16px;
+
+  margin-bottom: 32px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #0043ff;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(0, 67, 255, 0.12);
+}
+
+/* =========================
+   NAVIGATION BUTTONS
+========================= */
+
+.pagination button,
+.error-banner button {
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.pagination button:hover,
+.error-banner button:hover {
+  transform: translateY(-1px);
+}
+
+.pagination button:active,
+.error-banner button:active {
+  transform: scale(0.98);
+}
+
+.pagination button:focus-visible,
+.error-banner button:focus-visible {
+  outline: 2px solid #0043ff;
+
+  outline-offset: 2px;
+}
