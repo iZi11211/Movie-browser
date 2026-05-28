@@ -1,22 +1,20 @@
 import { useState } from 'react';
 import { InfiniteMovieList } from './components/InfiniteMovieList';
 import { MovieModal } from './components/MovieModal';
-import { AnimatePresence } from 'framer-motion';
 import { ToastContainer } from './components/ToastContainer';
 import './styles/global.css';
 
-function App() {
+export default function App() {
   const [query, setQuery] = useState('');
   const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
-  const [toasts, setToasts] = useState<{ id: number; message: string }[]>([]);
+  const [toasts, setToasts] = useState<any[]>([]);
 
   const addToast = (message: string) => {
     const id = Date.now();
-
-    setToasts((prev) => [...prev, { id, message }]);
+    setToasts((p) => [...p, { id, message }]);
 
     setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
+      setToasts((p) => p.filter((t) => t.id !== id));
     }, 2000);
   };
 
@@ -26,8 +24,6 @@ function App() {
 
       <input
         className="search-input"
-        type="text"
-        placeholder="Szukaj filmów..."
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
@@ -37,26 +33,20 @@ function App() {
 
       <InfiniteMovieList
         query={query}
-        onSelectMovie={(id) => {
+        onSelectMovie={(id: number) => {
           setSelectedMovieId(id);
           addToast('🎬 Film otwarty');
         }}
       />
 
-      <AnimatePresence mode="wait">
-        {selectedMovieId && (
-          <MovieModal
-            key="movie-modal"
-            movieId={selectedMovieId}
-            onClose={() => setSelectedMovieId(null)}
-          />
-        )}
-      </AnimatePresence>
+      {selectedMovieId && (
+        <MovieModal
+          movieId={selectedMovieId}
+          onClose={() => setSelectedMovieId(null)}
+        />
+      )}
 
-      {/* 🍞 TOASTS (TO BRAKOWAŁO) */}
       <ToastContainer toasts={toasts} />
     </div>
   );
 }
-
-export default App;

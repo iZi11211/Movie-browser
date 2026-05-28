@@ -379,9 +379,6 @@ body {
 /* HOVER */
 
 .movie-card:hover {
-  transform:
-    scale(1.03)
-    translateY(-2px);
 
   box-shadow:
     0 8px 24px
@@ -571,5 +568,27 @@ body {
   .skeleton {
     animation: none;
     background: #1f2937;
+  }
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .movie-card:hover {
+    transform: scale(1.03) translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .movie-card,
+  .movie-card:hover {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }

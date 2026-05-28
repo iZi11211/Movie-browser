@@ -1,18 +1,23 @@
 // src/components/MovieCard.tsx
 
 import { useCallback, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useFavorites } from '../hooks/useFavorites';
 import type { Movie } from '../hooks/useFetchMovies';
+import { useMotion } from '../motion';
 
 import './MovieCard.css';
 
 interface Props {
   movie: Movie;
-  onClick?: () => void; // 🔥 DODANE: otwieranie modala
+  onClick?: () => void;
 }
 
 export function MovieCard({ movie, onClick }: Props) {
   const { isFavorite, toggleFavorite } = useFavorites();
+
+  // 🎯 central motion system
+  const { reduce, duration, easing } = useMotion();
 
   const [optimisticFav, setOptimisticFav] = useState<boolean | null>(null);
 
@@ -20,7 +25,7 @@ export function MovieCard({ movie, onClick }: Props) {
 
   const handleToggle = useCallback(
     async (e: React.MouseEvent) => {
-      e.stopPropagation(); // 🔥 nie otwieraj modala przy kliknięciu ❤️
+      e.stopPropagation();
 
       setOptimisticFav(!displayedFav);
 
@@ -34,8 +39,47 @@ export function MovieCard({ movie, onClick }: Props) {
     [displayedFav, toggleFavorite, movie]
   );
 
+  // 🎯 JEDNE VARIANTS (zgodne z reduced motion)
+  const variants = {
+    hidden: {
+      opacity: 0,
+      y: reduce ? 0 : 16,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  };
+
   return (
-    <div className="movie-card" onClick={onClick}>
+    <motion.div
+      className="movie-card"
+      onClick={onClick}
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      transition={{
+        duration: duration.ui,
+        ease: easing.out,
+      }}
+
+      // 🎯 micro interaction (hover)
+      whileHover={
+        reduce
+          ? undefined
+          : {
+              scale: 1.03,
+              transition: {
+                duration: duration.micro,
+                ease: easing.out,
+              },
+            }
+      }
+
+      whileTap={
+        reduce ? undefined : { scale: 0.98 }
+      }
+    >
       <img
         src={
           movie.poster_path
@@ -65,6 +109,6 @@ export function MovieCard({ movie, onClick }: Props) {
           {displayedFav ? '❤️' : '🤍'}
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
